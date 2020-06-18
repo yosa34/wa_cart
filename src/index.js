@@ -10,8 +10,9 @@ window.CartItem = CartItem
 
 
 
-const item = new Item( "ボールペン", 400, "文房具" );
-console.log(item);
+// const item = new Item( "ボールペン", 400, "文房具" );
 
-const cartItem = new CartItem( "ボールペン", 400, 2, "文房具" );
-console.log(cartItem);
+// const cartItem = new CartItem( "ボールペン", 400, 2, "文房具" );
+
+// const cart = new Cart( "ボールペン", 400, 2, "文房具" );
+
