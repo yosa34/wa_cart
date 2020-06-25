@@ -41,19 +41,22 @@ export default class Cart{
         return this
     }
 
-    /**
+     /**
      * カートの中の商品の数量を変更する
-     * @param int itemId, iny quantity
-     *  */
+     * quantityに0以下の値が渡された場合は、
+     * その商品をカートから削除する
+     * @param int itemId
+     * @param int quantity
+     */
     changeCartQuantity (itemId, quantity) {
         const targetCartItem = this.cartyItems.find(
             cartItem => cartItem.itemId === cartItem.itemId
         )
 
         // !! bool値で返すやり方
-        const hasItem = !!itemInCart
+        // const hasItem = !!itemInCart
 
-        if(hasItem){
+        if(targetCartItem){
             if(quantity > 0){
                 targetCartItem.quantity = quantity
             }else{
@@ -72,19 +75,19 @@ export default class Cart{
      * @param int itemId
      * */
     deleteFromCart (itemId) {
-        const cartItems = []
-
-        /** for (let i = 0;i < this.cartItems.length; i++) {
-                if(this.cartItems[i].itemId !== itemId){
-                    cartItems.push(this.cartItems[i])
-                }
+        // const cartItems = []
+        /**
+         for (let i = 0;i < this.cartItems.length; i++) {
+            if(this.cartItems[i].itemId !== itemId){
+                cartItems.push(this.cartItems[i])
             }
-            this.cartItems = cartItems
+        }
 
-            this.cartItems.array.forEach(cartItems => {
-                if(cartItems.itemId !== itemId)cartItems.push(cartItem)
-            });
-            this.cartItems = cartItems;
+        this.cartItems = cartItems
+        this.cartItems.array.forEach(cartItems => {
+            if(cartItems.itemId !== itemId)cartItems.push(cartItem)
+        });
+        this.cartItems = cartItems;
         */
 
         // filter方式
@@ -109,5 +112,5 @@ export default class Cart{
     }
 
     //レジに移動する
-    // goToRegister () {}
+    goToRegister () {}
 }
