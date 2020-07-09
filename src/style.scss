@@ -1,0 +1,27 @@
+@import '../node_modules/materialize-css/sass/materialize.scss';
+
+.price, .total {
+    text-align: right;
+    font-size: 40px;
+  }
+
+  input[type="number"] {
+    width: 30px !important;
+  }
+
+  .item img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-image {
+    width: 230px;
+  }
+
+  .total-quantity {
+    font-size: 15px;
+  }
+
+  .main-content {
+    margin-top: 30px;
+  }

@@ -1,32 +1,35 @@
-import CartItem from "../models/CartItem";
+import CartItem from '../models/CartItem'
 
+export default class Cart {
 
-export default class Cart{
-
-    constructor ( catItems = [] ) {
-        this.catItems = catItems
+    constructor (
+        cartItems = []
+    ) {
+        this.cartItems = cartItems
         this.calcTotalPrice()
     }
 
     /**
-     * カートに商品を入れる
-    */
+     * 商品をカートに追加する
+     * 同じ商品が選択された場合は、
+     * カートの中の商品の数量に1追加する
+     * 
+     * @param Item item 商品クラスのインスタンス
+     */
     addToCart (item) {
-        // find() 一個だけ取得
+        // CartItemのインスタンス もしくは undefined
         const itemInCart = this.cartItems.find(
             cartItem => item.id === cartItem.itemId
         )
-        // !! bool値で返すやり方
         const hasItem = !!itemInCart
 
-        if(hasItem){
+        if (hasItem) {
             this.changeCartQuantity(
                 itemInCart.itemId, itemInCart.quantity + 1
-            )
-        }else{
-            // カートに追加していく処理
-            this.cartItems = [
-                ...this.cartItems,//オブジェクトを展開
+                )
+        } else {
+            this.cartItems = [  
+                ...this.cartItems,
                 new CartItem(
                     item.id,
                     item.itemName,
@@ -40,77 +43,59 @@ export default class Cart{
         this.calcTotalPrice()
         return this
     }
-
-     /**
+    /**
      * カートの中の商品の数量を変更する
      * quantityに0以下の値が渡された場合は、
      * その商品をカートから削除する
      * @param int itemId
      * @param int quantity
+     * 
      */
     changeCartQuantity (itemId, quantity) {
-        const targetCartItem = this.cartyItems.find(
-            cartItem => cartItem.itemId === cartItem.itemId
-        )
-
-        // !! bool値で返すやり方
-        // const hasItem = !!itemInCart
-
-        if(targetCartItem){
-            if(quantity > 0){
+        const targetCartItem = this.cartItems.find(
+            cartItem => cartItem.itemId === itemId
+            )
+        if (targetCartItem) {
+            if (quantity > 0) {
                 targetCartItem.quantity = quantity
-            }else{
-                this.deleteFromCart(itemId);
+            } else {
+                this.deleteFromCart(itemId)
             }
-
-        }else{
-            console.error('対象の商品がカートに入っていません');
+        } else {
+            console.error('対象の商品がカートに入っていません')
         }
         this.calcTotalPrice()
         return this
     }
-
     /**
-     * カートの中から商品を削除する
+     * カートの中の商品を削除する
      * @param int itemId
-     * */
+     */
     deleteFromCart (itemId) {
         // const cartItems = []
-        /**
-         for (let i = 0;i < this.cartItems.length; i++) {
-            if(this.cartItems[i].itemId !== itemId){
-                cartItems.push(this.cartItems[i])
-            }
-        }
-
-        this.cartItems = cartItems
-        this.cartItems.array.forEach(cartItems => {
-            if(cartItems.itemId !== itemId)cartItems.push(cartItem)
-        });
-        this.cartItems = cartItems;
-        */
-
-        // filter方式
+        // for (let i = 0;i < this.cartItems.length; i++) {
+        //     if (this.cartItems[i].itemId !== itemId) {
+        //         cartItems.push(this.cartItems[i])
+        //     }
+        // }
+        // this.cartItems = cartItems
+        // this.cartItems.forEach(cartItem => {
+        //     if (cartItem.itemId !== itemId) cartItems.push(cartItem)
+        // })
+        // this.cartItems = cartItems;
         this.cartItems = this.cartItems.filter(
             cartItem => cartItem.itemId !== itemId
-        )
+            )
 
         this.calcTotalPrice()
         return this
     }
-
-    /**
-     * 小計を計算する
-    */
-    calcTotalPrice () {
+    calcTotalPrice () { 
         this.totalPrice = this.cartItems.reduce(
-            (totalPrice, cartItem) => totalPrice + (cartItem.itemPrice * cartIt4em.quantity),
-            0
+            (totalPrice, cartItem) =>
+                totalPrice + (cartItem.itemPrice * cartItem.quantity), 0
         )
-
         return this
     }
-
-    //レジに移動する
-    goToRegister () {}
+    goToResister() {}
 }

@@ -1,18 +1,26 @@
-import Cart from './scripts/models/Cart'
-import Item from './scripts/models/Item'
 import CartItem from './scripts/models/CartItem'
+import Cart from './scripts/views/Cart';
 
-window.Cart = Cart
-window.Item = Item
-window.CartItem = CartItem
+const pen = new CartItem(1, 'ペン', 300, 1, '文房具')
+const note = new CartItem(2, 'ノート', 400, 3, '文房具')
 
+const cartItems = [ pen, note ]
 
+const totalPrice = 1500
 
+const onQuantityChanged = (cartItem, quantity) => {
+    console.log('商品の数量が変更されました', cartItem, quantity)
+}
 
+const onDeleteItemButtonClicked = (cartItem) => {
+    console.log('商品の削除ボタンがクリックされました', cartItem)
+}
 
-// const item = new Item( "ボールペン", 400, "文房具" );
+const cart = new Cart({ 
+    cartItems,
+    totalPrice,
+    onQuantityChanged,
+    onDeleteItemButtonClicked
+})
 
-// const cartItem = new CartItem( "ボールペン", 400, 2, "文房具" );
-
-// const cart = new Cart( "ボールペン", 400, 2, "文房具" );
-
+cart.render("#cart")

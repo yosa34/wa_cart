@@ -1,11 +1,11 @@
 export default class CartItem{
     constructor (
         itemId,
-        itemName= '',
+        itemName = '',
         itemPrice = 0,
         quantity = 0,
         category = '',
-        img = 'http://placehold.it/200x200'
+        img = 'https://placehold.it/200x200'
     ) {
 
         this.itemId = itemId
