@@ -50,7 +50,9 @@ export default class Cart {
         `;
 
         const targetDom = document.querySelector(parent);
-        
+
+        targetDom.innerHTML = '';
+
         const appendDom = createDom(domText);
 
         targetDom.append(appendDom);
