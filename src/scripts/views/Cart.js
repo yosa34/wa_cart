@@ -92,7 +92,8 @@ export default class Cart {
       const elem = evt.target
       const quantity = parseInt(elem.value)
       const targetItemId = parseInt(elem.dataset.itemIndex)
-
+      console.log(evt);
+      console.log(elem.value);
       const targetItem = this.cartItems.find(
         cartItem => cartItem.itemId === targetItemId
         )

@@ -111,14 +111,18 @@ export default class App {
    }
       /**
     * 
-    * @param {cartItem} cartItem
+    * @param {CartItem} cartItem
     *  */
    deleteFromCart(cartItem) {
         this.cart.deleteFromCart(cartItem.itemId);
         this.renderCart();
    }
-   
-   changeQuantity() {
-
+         /**
+    * 
+    * @param {CartItem} cartItem
+    *  */
+   changeQuantity(cartItem,quantity) {
+        this.cart.changeCartQuantity(cartItem.itemId, quantity);
+        this.renderCart();
    }
 }
